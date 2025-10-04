@@ -4,3 +4,7 @@
 # ignore pyenv
 
 /pyvenv.cfg
+
+# ignore example.db
+
+/example.db
