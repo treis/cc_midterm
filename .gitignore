@@ -1,3 +1,6 @@
 # Ignore secret.py
 /secret.py
 
+# ignore pyenv
+
+/pyvenv.cfg
