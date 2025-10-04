@@ -2,6 +2,7 @@ import azure.functions as func
 import logging
 import uuid
 import sqlite3
+from secret.py import valid_key
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION) # initialize application and assign to app variable
 
@@ -9,7 +10,7 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION) # initialize app
 
 conn = sqlite3.connect('example.db')
 cursor = conn.cursor()
-valid_api_key = 'kiwi'
+valid_api_key = valid_key
 
 # type statement into database to create table of products if it does not exist
 
