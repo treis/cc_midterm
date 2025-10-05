@@ -1,5 +1,5 @@
 # Test gnore secret.py round 2 
-secret.py
+/secret.py
 
 # ignore pyenv
 
@@ -7,4 +7,4 @@ pyvenv.cfg
 
 # Test ignore example.db
 
-example.db
+/example.db
