@@ -1,10 +1,10 @@
 # Ignore secret.py
-/secret.py
+secret.py
 
 # ignore pyenv
 
-/pyvenv.cfg
+pyvenv.cfg
 
 # ignore example.db
 
-/example.db
+example.db
