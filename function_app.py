@@ -1,7 +1,7 @@
 import azure.functions as func
 import logging
 import sqlite3
-from secret.py import valid_key
+from secret import valid_key
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION) # initialize application and assign to app variable
 

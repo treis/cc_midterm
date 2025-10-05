@@ -18,3 +18,13 @@ __pycache__/
 Lib
 Scripts
 
+# remove host.json, local.settings.json 
+
+host.json
+local.settings.json
+
+
+# ignore venv
+
+venv
+
