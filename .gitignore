@@ -1,5 +1,5 @@
 # Test gnore secret.py round 2 
-/secret.py
+secret.py
 
 # ignore pyenv
 
@@ -15,8 +15,6 @@ __pycache__/
 
 # test ignore Lib, Scripts
 
-Lib/
-Scripts/
-
-.
+Lib
+Scripts
 
