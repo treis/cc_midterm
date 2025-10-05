@@ -3,7 +3,7 @@
 
 # ignore pyenv
 
-pyvenv.cfg
+/pyvenv.cfg
 
 # Test ignore example.db
 
