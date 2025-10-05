@@ -1,10 +1,10 @@
-# Ignore secret.py
+# Test gnore secret.py
 secret.py
 
 # ignore pyenv
 
 pyvenv.cfg
 
-# ignore example.db
+# Test ignore example.db
 
 example.db
