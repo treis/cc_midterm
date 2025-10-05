@@ -8,3 +8,12 @@
 # Test ignore example.db
 
 /example.db
+
+# test ignore __pycache__
+
+__pycache__/
+
+# test ignore Lib, Scripts
+
+Lib/
+Scripts/
