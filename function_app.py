@@ -35,30 +35,36 @@ def has_body(request: func.HttpRequest):
     except:
         return False
 
-def prepare_data(provided_data: list):
-    master_list = []
-    for item_tuple in provided_data:
+# Helper functions that checks if there is a json body 
+
+def prepare_data(provided_data: list): # more specifically, a list of tuples
+
+    master_json = {}
+
+    for item_tuple in provided_data: 
         id = item_tuple[0]
         name = item_tuple[1]
         price = item_tuple[2]
-        master_list.append({'id': id, 'name': name, 'price': price})
-        
-    return master_list
 
+        per_item_json = {'name': name,
+                         'price': price
+        }
 
-def json_response(payload: dict, status_code: int):
-    return func.HttpResponse(
-        json.dumps(payload),
-        status_code=status_code,
-        mimetype="application/json"
-    )
+        master_json[id] = per_item_json
 
-# CREATE
-@app.route(route="create_item")
-def create_item(req: func.HttpRequest) -> func.HttpResponse:
-    provided_key = req.headers.get('api_key')
-    if not verify_authority(provided_key):
-        return json_response({"error": "Unauthorized access"}, 401)
+    return master_json
+
+# Helper function that prepares responses from sqllite 3 into a json response 
+
+@app.route(route = "create_item") # CREATE an item 
+def create_item (req: func.HttpRequest) -> func.HttpResponse:
+
+    provided_key = req.headers.get('api_key') # get api key provided in request
+
+    if verify_authority(provided_key): # check if the user is authorized based on provided request api key parameter
+        pass
+    else: 
+        return func.HttpResponse("401: Unauthorized access.", status_code=401) # Unauthorized
     
     if not has_body(req):
         return json_response({"error": "Bad request"}, 400)
@@ -132,14 +138,19 @@ def delete_item(req: func.HttpRequest) -> func.HttpResponse:
         try:
             cursor.execute('DELETE FROM products WHERE id = ?', (provided_id,))
             conn.commit()
-            return json_response({"message": "Item deleted", "id": provided_id}, 200)
-        except sqlite3.Error as e:
-            return json_response({"error": str(e)}, 400)
-    else:
-        return json_response({"error": "Bad request"}, 400)
-# READ
-@app.route(route="read_item")
-def read_item(req: func.HttpRequest) -> func.HttpResponse:
+            # conn.close() # close connection to avert database troubles
+            return func.HttpResponse(f"Successfully deleted item at id {provided_id}.", status_code=200) # Successfully submitted update
+        except sqlite3.Error as e: 
+            # conn.close() # close connection to avert database troubles
+            return func.HttpResponse(f"400: Bad request. Error log below {e}.", status_code=400) # Terminate request with bad 400 code
+            # this is meant to come up when the database identifies that there is no value to update
+    else: 
+        # conn.close() # close connection to avert database troubles
+        return func.HttpResponse("400: Bad request.", status_code=400) # Malformed request or database error message
+    
+@app.route(route = "read_item") # UPDATE an item
+def read_item (req: func.HttpRequest) -> func.HttpResponse:
+
     provided_key = req.headers.get('api_key')
     if not verify_authority(provided_key):
         return json_response({"error": "Unauthorized access"}, 401)
