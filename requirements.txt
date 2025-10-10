@@ -3,5 +3,3 @@
 # azure-monitor-opentelemetry
 
 azure-functions
-uuid
-sqllite3

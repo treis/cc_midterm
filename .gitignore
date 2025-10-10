@@ -28,3 +28,5 @@ local.settings.json
 
 venv
 
+
+.python_packages
