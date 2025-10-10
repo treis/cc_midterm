@@ -36,13 +36,15 @@ def has_body(request: func.HttpRequest):
         return False
 
 def prepare_data(provided_data: list):
-    master_json = {}
+    master_list = []
     for item_tuple in provided_data:
         id = item_tuple[0]
         name = item_tuple[1]
         price = item_tuple[2]
-        master_json[id] = {'name': name, 'price': price}
-    return master_json
+        master_list.append({'id': id, 'name': name, 'price': price})
+        
+    return master_list
+
 
 def json_response(payload: dict, status_code: int):
     return func.HttpResponse(
@@ -135,7 +137,6 @@ def delete_item(req: func.HttpRequest) -> func.HttpResponse:
             return json_response({"error": str(e)}, 400)
     else:
         return json_response({"error": "Bad request"}, 400)
-
 # READ
 @app.route(route="read_item")
 def read_item(req: func.HttpRequest) -> func.HttpResponse:
